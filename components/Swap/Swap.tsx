@@ -1,13 +1,10 @@
-import { Box, Heading, ListItem, Stack, Text, UnorderedList } from "@chakra-ui/react"
-import { chains } from "chain-registry"
-import { useRouter } from "next/router"
+import { Box, Heading, ListItem, OrderedList, Stack, Text } from "@chakra-ui/react";
+import { chains } from "chain-registry";
 import {
-  AsyncCreatableSelect,
-  AsyncSelect,
-  CreatableSelect,
   Select,
-  SingleValue,
+  SingleValue
 } from "chakra-react-select";
+import { useRouter } from "next/router";
 
 type Props = {}
 
@@ -31,7 +28,7 @@ const Swap = (props: Props) => {
       <Text>Swap</Text>
       <Text>Source: {fromChain}</Text>
 
-      <Box >
+      <Box mb="10">
 
         <Select
           colorScheme="purple"
@@ -45,16 +42,23 @@ const Swap = (props: Props) => {
         />
       </Box>
 
-      <Heading size="md">Wallet issues on swap page</Heading>
+      <Stack borderRadius="md" bg="gray.200" p="5">
 
-      <Box p="5" bg="red.300" borderRadius="md">
-        <UnorderedList>
-          <ListItem>Switching chains that are not approved, will cause connect button to show, even after approveing chain on kepler</ListItem>
-          <ListItem>Some time dosent show add chain approval on kepler if chain is not added to kepler</ListItem>
-          <ListItem>We are trying have wallet to be connected all the time when switching between the chains, if chain is not added or approved on keplr, it shoud popup approval screen and connect wallet again</ListItem>
-        </UnorderedList>
-      </Box>
+        <Heading size="sm">Issue Description:</Heading>
+        <Text>
+          When switching chains, it disconnects the wallet, and connect button shows up again. This is happening when switching between chains that are not approved or added on kepler.
+        </Text>
 
+        <Heading size="sm">Steps to reproduce:</Heading>
+        <OrderedList>
+          <ListItem>Connect to keplr</ListItem>
+          <ListItem>Remove connections to the app inside keplr >Settings>Security&privacy</ListItem>
+          <ListItem>Refresh page</ListItem>
+          <ListItem>Search for chains other than Juno, Terra or Neutron</ListItem>
+          <ListItem>Ex: Select migaloo or injective</ListItem>
+          <ListItem>See the wallet disconnect</ListItem>
+        </OrderedList>
+      </Stack>
 
     </Stack>
   )

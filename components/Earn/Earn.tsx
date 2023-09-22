@@ -1,16 +1,16 @@
 import {
-  Box,
   Heading,
   ListItem,
+  OrderedList,
   Stack,
   Table,
   TableContainer,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
-  Tr,
-  UnorderedList
+  Tr
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
@@ -40,7 +40,7 @@ const Earn = (props: Props) => {
   }
 
   return (
-    <Stack spacing={4}>
+    <Stack spacing={10}>
       <TableContainer>
         <Table size='sm'>
           <Thead>
@@ -69,15 +69,23 @@ const Earn = (props: Props) => {
         </Table>
       </TableContainer>
 
-      <Heading size="md">Wallet issues on earn page</Heading>
+      <Stack borderRadius="md" bg="gray.200" p="5">
+        <Heading size="sm">Issue Description:</Heading>
+        <Text>
+          On first connect, even though we are approving 3 chains, it still ask for approval on terra and juno again, and wallet status is coming as disconnected that is causing connect button to show. Once all of the chains are apporved its looks smooth in this demo, however after deploying to vercel we noticed that it disconnects randomly
+          Try clearing connected website on kepler and refresh the page to reproduce.
+        </Text>
 
-      <Box p="5" bg="red.300" borderRadius="md">
-        <UnorderedList>
-          <ListItem>On first connect, even though we are approving 3 chains, it still ask for approval on terra and juno again, and wallet status is coming as disconnected that is causing connect button to show </ListItem>
-          <ListItem>Once all of the chains are apporved its looks smooth in this demo, however after deploying to vercel we noticed that it disconnects randomly</ListItem>
-          <ListItem>Try clearing connected website on kepler and refresh the page to reproduce.</ListItem>
-        </UnorderedList>
-      </Box>
+        <Heading size="sm">Steps to reproduce:</Heading>
+        <OrderedList>
+          <ListItem>Connect to keplr</ListItem>
+          <ListItem>Remove connections to the app inside keplr >Settings>Security&privacy</ListItem>
+          <ListItem>Refresh page</ListItem>
+          <ListItem>Approve new connection</ListItem>
+          <ListItem>Click one of the Table rows with vault x</ListItem>
+          <ListItem>See the wallet disconnect</ListItem>
+        </OrderedList>
+      </Stack>
 
     </Stack>
   )
